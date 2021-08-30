@@ -1,0 +1,22 @@
+cradle:
+  multi:
+    - path: ./deps/sub-comp
+      config:
+        cradle:
+          cabal:
+            - path: "src"
+              component: "lib:sub-comp"
+
+    - path: ./deps/sub-comp2
+      config:
+        cradle:
+          cabal:
+            - path: "src"
+              component: "lib:sub-comp2"
+
+    - path: ./
+      config:
+        cradle:
+          cabal:
+            - path: "src"
+              component: "lib:app"

@@ -128,6 +128,9 @@ main = do
           , testCaseSteps "monorepo-cabal" {- issue https://github.com/mpickering/hie-bios/issues/200 -}
                         $  testDirectory isCabalCradle "./tests/projects/monorepo-cabal" "A/Main.hs"
                         >> testDirectory isCabalCradle "./tests/projects/monorepo-cabal" "B/MyLib.hs"
+          , testCaseSteps "issue-306" $ testLoadCradleDependencies isCabalCradle "./tests/projects/issue-306" "deps/sub-comp/src/Lib.hs"
+            (\deps -> deps `shouldMatchList` ["deps" </> "sub-comp2" </> "sub-comp2.cabal", "cabal.project", "cabal.project.local"]
+            )
 -- TODO: Remove once stack and ghc-8.10.1 play well
 -- https://github.com/bubba/hie-bios/runs/811271872?check_suite_focus=true
 #if __GLASGOW_HASKELL__ < 810
