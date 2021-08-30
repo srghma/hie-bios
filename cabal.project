@@ -1,1 +1,4 @@
 packages: .
+
+package network
+  tests: False
