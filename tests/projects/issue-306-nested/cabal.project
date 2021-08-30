@@ -1,0 +1,1 @@
+packages: ., ./deps/sub-comp, ./deps/sub-comp2/sub-comp2-base, ./deps/sub-comp2/sub-comp2-main

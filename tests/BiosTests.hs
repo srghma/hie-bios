@@ -129,8 +129,24 @@ main = do
                         $  testDirectory isCabalCradle "./tests/projects/monorepo-cabal" "A/Main.hs"
                         >> testDirectory isCabalCradle "./tests/projects/monorepo-cabal" "B/MyLib.hs"
           , testCaseSteps "issue-306" $ testLoadCradleDependencies isCabalCradle "./tests/projects/issue-306" "deps/sub-comp/src/Lib.hs"
-            (\deps -> deps `shouldMatchList` ["deps" </> "sub-comp2" </> "sub-comp2.cabal", "cabal.project", "cabal.project.local"]
+            (\deps -> deps `shouldMatchList` ["deps" </> "sub-comp" </> "sub-comp.cabal", "cabal.project", "cabal.project.local"]
             )
+          , testCaseSteps "issue-306-2" $ testLoadCradleDependencies isCabalCradle "./tests/projects/issue-306" "src/MyLib.hs"
+            (\deps -> deps `shouldMatchList` ["app.cabal", "cabal.project", "cabal.project.local"]
+            )
+          , testCaseSteps "issue-306-nested" $ testLoadCradleDependencies isCabalCradle "./tests/projects/issue-306-nested" "deps/sub-comp2/sub-comp2-base/src/SubComp2Base.hs"
+            (\deps -> deps `shouldMatchList` ["deps" </> "sub-comp2" </>  "sub-comp2-base" </> "sub-comp2-base.cabal", "cabal.project", "cabal.project.local"]
+            )
+          , testCaseSteps "issue-306-nested-2" $ testLoadCradleDependencies isCabalCradle "./tests/projects/issue-306-nested" "deps/sub-comp2/sub-comp2-main/src/SubComp2Main.hs"
+            (\deps -> deps `shouldMatchList` ["deps" </> "sub-comp2" </>  "sub-comp2-main" </> "sub-comp2-main.cabal", "cabal.project", "cabal.project.local"]
+            )
+          , testCaseSteps "issue-306-nested-3" $ testLoadCradleDependencies isCabalCradle "./tests/projects/issue-306-nested" "deps/sub-comp/src/SubComp.hs"
+            (\deps -> deps `shouldMatchList` ["deps" </> "sub-comp" </>  "sub-comp.cabal", "cabal.project", "cabal.project.local"]
+            )
+          , testCaseSteps "issue-306-nested-4" $ testLoadCradleDependencies isCabalCradle "./tests/projects/issue-306-nested" "src/App.hs"
+            (\deps -> deps `shouldMatchList` ["app.cabal", "cabal.project", "cabal.project.local"]
+            )
+
 -- TODO: Remove once stack and ghc-8.10.1 play well
 -- https://github.com/bubba/hie-bios/runs/811271872?check_suite_focus=true
 #if __GLASGOW_HASKELL__ < 810

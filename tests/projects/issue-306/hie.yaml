@@ -4,14 +4,14 @@ cradle:
       config:
         cradle:
           cabal:
-            - path: "src"
+            - path: "./deps/sub-comp/src"
               component: "lib:sub-comp"
 
     - path: ./deps/sub-comp2
       config:
         cradle:
           cabal:
-            - path: "src"
+            - path: "./deps/sub-comp2/src"
               component: "lib:sub-comp2"
 
     - path: ./

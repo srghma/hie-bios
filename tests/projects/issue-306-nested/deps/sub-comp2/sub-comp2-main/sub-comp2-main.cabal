@@ -1,0 +1,11 @@
+cabal-version:       >=1.10
+name:                sub-comp2-main
+version:             0.1.0.0
+build-type:          Simple
+
+library
+  exposed-modules:     SubComp2Main
+  hs-source-dirs:      src
+  build-depends:       base < 5
+                     , sub-comp2-base
+  default-language:    Haskell2010
